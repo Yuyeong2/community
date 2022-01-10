@@ -1,0 +1,23 @@
+* { box-sizing: border-box; padding: 0; margin: 0; }
+a { text-decoration: none; }
+
+header { background-color: cornflowerblue; }
+footer { background-color: cornflowerblue; }
+
+
+.flex-align-center { align-items: center; }
+.flex-container { display: flex; height: 100%; width: 100%; }
+
+.font-color-white { color: #fff; }
+
+.menu-selected { font-weight: bold; }
+.menu-selected a { color: #131d6b; }
+
+.h-50 { height: 50px; }
+.h-100 { height: 100px; }
+
+.m-r-10 { margin-right: 10px; }
+.m-r-20 { margin-right: 20px; }
+
+.p-lr-10 { padding: 0 10px; }
+.p-lr-20 { padding: 0 20px; }
