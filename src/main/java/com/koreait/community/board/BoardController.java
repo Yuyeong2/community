@@ -45,12 +45,24 @@ public class BoardController {
             lastIp = req.getRemoteAddr();
         }
         dto.setLastip(lastIp);
-        model.addAttribute(Const.DATA, service.selBoardDetail(dto));
+        model.addAttribute(Const.DATA, service.selBoard(dto));
     }
 
     @GetMapping("/del")
     public String delProc(BoardEntity entity) {
         int result = service.delBoard(entity);
         return "redirect:/board/list/" + entity.getIcategory();
+    }
+
+    @GetMapping("/mod")
+    public String mod(BoardDto dto, Model model) {
+        model.addAttribute(Const.DATA, service.selBoard(dto));
+        return "board/write";
+    }
+
+    @PostMapping("/mod")
+    public String modProc(BoardEntity entity) {
+        service.updBoard(entity);
+        return "redirect:/board/detail?iboard=" + entity.getIboard();
     }
 }

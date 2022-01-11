@@ -8,6 +8,9 @@ footer { background-color: cornflowerblue; }
 .flex-align-center { align-items: center; }
 .flex-container { display: flex; height: 100%; width: 100%; }
 
+.submenu-section {display: grid; grid-template-columns: 150px 1fr; }
+.submenu-section:first-child {background-color: #efefef; }
+
 .font-color-white { color: #fff; }
 
 .menu-selected { font-weight: bold; }
@@ -19,5 +22,6 @@ footer { background-color: cornflowerblue; }
 .m-r-10 { margin-right: 10px; }
 .m-r-20 { margin-right: 20px; }
 
+.p10 { padding: 10px; }
 .p-lr-10 { padding: 0 10px; }
 .p-lr-20 { padding: 0 20px; }

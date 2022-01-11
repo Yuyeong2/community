@@ -16,4 +16,16 @@
         <put-attribute name="addr1" value="{1}"/>
         <put-attribute name="addr2" value="{1}/{2}"/>
     </definition>
+
+    <definition name="tiles_submenu_template" template="/WEB-INF/views/temp/tiles_submenu_layout.jsp" preparer="MenuPreparer">
+        <put-attribute name="header" value="/WEB-INF/views/temp/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/temp/footer.jsp" />
+        <put-attribute name="common" value="common"/>
+    </definition>
+    <definition name="user/*/*" extends="tiles_submenu_template">
+        <put-attribute name="title" value="{2}"/>
+        <put-attribute name="content" value="/WEB-INF/views/user/{1}/{2}.jsp"/>
+        <put-attribute name="addr1" value="{1}"/>
+        <put-attribute name="addr2" value="{1}/{2}"/>
+    </definition>
 </tiles-definitions>

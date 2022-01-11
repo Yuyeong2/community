@@ -70,4 +70,7 @@ public class UserController {
         res.put("result", service.idChk(uid));
         return res;
     }
+
+    @GetMapping("/mypage/profile")
+    public void mypageProfile() {}
 }
