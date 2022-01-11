@@ -4,7 +4,9 @@ import com.koreait.community.Const;
 import com.koreait.community.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +21,10 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/login")
-    public void login() {}
+    public void login(Model model) {
+        model.addAttribute("title", "로그인");
+        model.addAttribute("b_title", "b_로그인");
+    }
 
     @PostMapping("/login")
     public String loginProc(UserEntity entity, RedirectAttributes reAttr) {
@@ -64,7 +69,7 @@ public class UserController {
     }
 
     @GetMapping("/idChk/{uid}")
-    @ResponseBody //return 이 json
+    @ResponseBody //return - json
     public Map<String, Integer> idChk(@PathVariable String uid) {
         Map<String, Integer> res = new HashMap<>();
         res.put("result", service.idChk(uid));
@@ -73,4 +78,10 @@ public class UserController {
 
     @GetMapping("/mypage/profile")
     public void mypageProfile() {}
+
+    @PostMapping("/mypage/profile")
+    public String mypageProfileProc(MultipartFile profileimg) {
+        System.out.println("fileName : " +profileimg.getOriginalFilename());
+        return "{Good}";
+    }
 }
