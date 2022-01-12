@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <description>MyCustomTag functions library</description>
+    <display-name>MyCustomTag functions</display-name>
+    <tlib-version>1.1</tlib-version>
+    <short-name>my</short-name>
+    <uri>tld/MyCustomTag.tld</uri>
+
+    <function>
+        <description>프로필 이미지 img Tag 생성</description>
+        <name>profileImg</name>
+        <function-class>com.koreait.community.MyCustomTag</function-class>
+        <function-signature>java.lang.String profileImg(java.lang.String, java.lang.String, java.lang.String, java.lang.String)</function-signature>
+        <example>
+            ${my:profileImg(str, str, str, str)}
+        </example>
+    </function>
+</taglib>
