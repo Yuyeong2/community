@@ -61,17 +61,17 @@ public class UserController {
         int result = service.join(entity);
         if(result == 0) {
             reAttr.addFlashAttribute(Const.MSG, Const.ERR_4);
-            return "redirect:/user/login";
+            return "redirect:/user/join";
         }
-
+        //회원가입 성공하면 로그인 처리
         service.login(entity);
         return "redirect:/board/list/1";
     }
 
     @GetMapping("/idChk/{uid}")
-    @ResponseBody //return - json
+    @ResponseBody
     public Map<String, Integer> idChk(@PathVariable String uid) {
-        Map<String, Integer> res = new HashMap<>();
+        Map<String, Integer> res = new HashMap();
         res.put("result", service.idChk(uid));
         return res;
     }
@@ -79,9 +79,12 @@ public class UserController {
     @GetMapping("/mypage/profile")
     public void mypageProfile() {}
 
+    @ResponseBody
     @PostMapping("/mypage/profile")
-    public String mypageProfileProc(MultipartFile profileimg) {
-        System.out.println("fileName : " +profileimg.getOriginalFilename());
-        return "{Good}";
+    public Map<String, String> mypageProfileProc(MultipartFile profileimg) {
+        String fileNm = service.uploadProfileImg(profileimg);
+        Map<String, String> result = new HashMap<>();
+        result.put("result", fileNm);
+        return result;
     }
 }

@@ -23,7 +23,7 @@ public class BoardController {
     private BoardService service;
 
     @GetMapping("/list/{icategory}")
-    public String  list(@PathVariable int icategory, BoardDto dto, Model model) {
+    public String list(@PathVariable int icategory, BoardDto dto, Model model) {
         model.addAttribute(Const.I_CATEGORY, icategory);
         model.addAttribute(Const.LIST, service.selBoardList(dto));
         dto.setIcategory(icategory);

@@ -11,7 +11,7 @@
     </definition>
 
     <definition name="basic.*.*" template="/WEB-INF/views/temp/basic_container.jsp">
-        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" cascade="true" />
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>
 
     <definition name="*/*" extends="tiles_template">

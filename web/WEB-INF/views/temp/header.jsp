@@ -13,7 +13,11 @@
                 <div class="m-r-20"><a href="/user/login" class="font-color-white">로그인</a></div>
             </c:when>
             <c:otherwise>
-                <div class="m-r-20"><a href="/user/mypage/profile" class="font-color-white">마이페이지</a></div>
+                <c:set var="profileImg" value="/res/img/defaultProfile.png" />
+                <c:if test="${sessionScope.loginUser.profileimg != null}">
+                    <c:set var="profileImg" value="/images/user/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileimg}" />
+                </c:if>
+                <div class="m-r-20"><a href="/user/mypage/profile"><div class="circular--img wh-30"><img src="${profileImg}" id="header-profileimg"></div></a></div>
                 <div class="m-r-20"><a href="/user/logout" class="font-color-white">로그아웃</a></div>
             </c:otherwise>
         </c:choose>
