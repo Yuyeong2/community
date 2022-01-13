@@ -3,6 +3,7 @@ package com.koreait.community.user;
 import com.koreait.community.Const;
 import com.koreait.community.MyFileUtils;
 import com.koreait.community.UserUtils;
+import com.koreait.community.model.UserDto;
 import com.koreait.community.model.UserEntity;
 import org.springframework.beans.BeanUtils;
 import org.mindrot.jbcrypt.BCrypt;
@@ -59,7 +60,9 @@ public class UserService {
     //이미지 업로드 처리 및 저장 파일명 리턴
     public String uploadProfileImg(MultipartFile mf) {
         if(mf == null) { return null; }
+
         UserEntity loginUser = userUtils.getLoginUser();
+
         final String PATH = Const.UPLOAD_IMG_PATH + "/user/" + loginUser.getIuser();
         String fileNm = fileUtils.saveFile(PATH, mf);
         System.out.println("fileNm : " + fileNm);
@@ -68,7 +71,7 @@ public class UserService {
         UserEntity entity = new UserEntity();
         entity.setIuser(loginUser.getIuser());
 
-
+        //기존 파일명
         String oldFilePath = PATH + "/" + loginUser.getProfileimg();
         fileUtils.delFile(oldFilePath);
 
@@ -76,8 +79,18 @@ public class UserService {
         entity.setProfileimg(fileNm);
         mapper.updUser(entity);
 
+        //세션 프로필 파일명을 수정해 준다.
         loginUser.setProfileimg(fileNm);
-
         return fileNm;
+    }
+    public int changePassword(UserDto dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
+        UserEntity dbUser = mapper.selUser(dto);
+        if(BCrypt.checkpw(dto.getCurrentUpw(), dbUser.getUpw())) {
+            return 2;
+        }
+        String hashedPw = BCrypt.hashpw(dto.getUpw(), BCrypt.gensalt());
+        dto.setUpw(hashedPw);
+        return mapper.updUser(dto);
     }
 }

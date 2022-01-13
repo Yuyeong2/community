@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="my" uri="tld/MyCustomTag.tld" %>
-<%@ taglib prefix="myjstl" uri="tld/MyCustomJstlTag.tld" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="my" uri="tld/MyCustomJstlTag.tld" %>
 <tiles:importAttribute name="menuList"/>
 <c:set var="currentPagePath" value="${requestScope['javax.servlet.forward.request_uri']}" />
 <c:set var="splitURI" value="${fn:split(currentPagePath, '/')}"/>
@@ -15,14 +14,11 @@
                 <div class="m-r-20"><a href="/user/login" class="font-color-white">로그인</a></div>
             </c:when>
             <c:otherwise>
-                <c:set var="profileImg" value="/res/img/defaultProfile.png" />
-                <c:if test="${sessionScope.loginUser.profileimg != null}">
-                    <c:set var="profileImg" value="/images/user/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileimg}" />
-                </c:if>
-                <div class="m-r-20"><a href="/user/mypage/profile"><div class="circular--img wh-30"><img src="${profileImg}" id="header-profileimg"></div></a></div>
+                <div class="m-r-20"><a href="/user/mypage/profile"><my:profileImg classVal="circular--img wh-30"
+                                                                                  iuser="${sessionScope.loginUser.iuser}"
+                                                                                  imgIdVal="header-profileimg"
+                                                                                  profileImgVal="${sessionScope.loginUser.profileimg}"/></a></div>
                 <div class="m-r-20"><a href="/user/logout" class="font-color-white">로그아웃</a></div>
-                <div class="m-r-20">${my:profileImg('', 'circular--img wh-30', sessionScope.loginUser.iuser, sessionScope.loginUser.profileimg)}</div>
-                <div class="m-r-20"><myjstl:profileImg classVal="circular--img wh-30" iuser="${sessionScope.loginUser.iuser}" profileImgVal="${sessionScope.loginUser.profileimg}"/></div>
             </c:otherwise>
         </c:choose>
         <c:forEach items="${menuList}" var="item">

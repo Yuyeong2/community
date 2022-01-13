@@ -21,8 +21,12 @@
         </attribute>
         <attribute>
             <name>iuser</name>
-            <required>false</required>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>imgIdVal</name>
+            <required>false</required>
         </attribute>
         <attribute>
             <name>profileImgVal</name>
