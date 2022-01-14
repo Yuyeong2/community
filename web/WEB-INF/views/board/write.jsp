@@ -12,7 +12,7 @@
     <c:set var="iboardVal" value="${requestScope.data.iboard}" />
     <c:set var="icategoryVal" value="0" />
 </c:if>
-<div>
+<div class="flex-container flex-center flex-direction-column">
     <h1>${titleVal}</h1>
     <form action="${actionVal}" method="post">
         <input type="hidden" name="iboard" value="${iboardVal}">

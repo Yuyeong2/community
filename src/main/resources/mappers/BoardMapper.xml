@@ -31,7 +31,26 @@
         WHERE A.isdel = 0
           AND A.iboard = ${iboard}
     </select>
-
+    <select id="selPrevNext" resultType="BoardPrevNextVo">
+        <![CDATA[
+        SELECT (
+                   SELECT iboard FROM t_board
+                   WHERE isdel = 0
+                     AND icategory = ${icategory}
+                     AND iboard > ${iboard}
+                   ORDER BY iboard
+                   LIMIT 1
+            ) AS previboard,
+            (
+                SELECT iboard FROM t_board
+                WHERE isdel = 0
+                AND icategory = ${icategory}
+                AND iboard < ${iboard}
+                ORDER BY iboard DESC
+                LIMIT 1
+                ) AS nextiboard
+        ]]>
+    </select>
     <update id="addHits">
         UPDATE t_board
         SET hits = hits + 1

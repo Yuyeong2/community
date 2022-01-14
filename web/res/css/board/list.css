@@ -1,1 +1,2 @@
-.record:hover {background-color: #a8beea; cursor: pointer; }
+.each-container { display: grid; grid-template-columns: 50px 1fr; }
+.record:hover { background-color: #efefef; cursor: pointer; }

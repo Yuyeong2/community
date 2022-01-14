@@ -5,8 +5,8 @@ import com.koreait.community.MyFileUtils;
 import com.koreait.community.UserUtils;
 import com.koreait.community.model.UserDto;
 import com.koreait.community.model.UserEntity;
-import org.springframework.beans.BeanUtils;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +19,7 @@ public class UserService {
     @Autowired private MyFileUtils fileUtils;
 
     public int login(UserEntity entity) { //uid, upw
-        UserEntity dbUser = null;
+        UserEntity dbUser;
         try {
             dbUser = mapper.selUser(entity);
         } catch (Exception e) {
@@ -83,11 +83,12 @@ public class UserService {
         loginUser.setProfileimg(fileNm);
         return fileNm;
     }
+
     public int changePassword(UserDto dto) {
         dto.setIuser(userUtils.getLoginUserPk());
         UserEntity dbUser = mapper.selUser(dto);
-        if(BCrypt.checkpw(dto.getCurrentUpw(), dbUser.getUpw())) {
-            return 2;
+        if(!BCrypt.checkpw(dto.getCurrentupw(), dbUser.getUpw())) {
+            return 2; //현재비밀번호 다름
         }
         String hashedPw = BCrypt.hashpw(dto.getUpw(), BCrypt.gensalt());
         dto.setUpw(hashedPw);

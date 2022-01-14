@@ -32,14 +32,14 @@
             'method': 'post',
             'body': fData
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setProfileImg(data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            setProfileImg(data);
+        })
+        .catch(e => {
+            console.log(e);
+        });
     }
 
     //이미지 세팅

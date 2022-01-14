@@ -15,9 +15,9 @@
             </c:when>
             <c:otherwise>
                 <div class="m-r-20"><a href="/user/mypage/profile"><my:profileImg classVal="circular--img wh-30"
-                                                                                  iuser="${sessionScope.loginUser.iuser}"
-                                                                                  imgIdVal="header-profileimg"
-                                                                                  profileImgVal="${sessionScope.loginUser.profileimg}"/></a></div>
+                                                                                iuser="${sessionScope.loginUser.iuser}"
+                                                                                imgIdVal="header-profileimg"
+                                                                                profileImgVal="${sessionScope.loginUser.profileimg}"/></a></div>
                 <div class="m-r-20"><a href="/user/logout" class="font-color-white">로그아웃</a></div>
             </c:otherwise>
         </c:choose>

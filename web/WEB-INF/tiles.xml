@@ -22,7 +22,7 @@
     </definition>
 
     <definition name="submenu.*.*" template="/WEB-INF/views/temp/submenu_container.jsp">
-        <put-attribute name="content" value="/WEB-INF/views/user/{1}/{2}.jsp" cascade="true" />
+        <put-attribute name="content" value="/WEB-INF/views/user/{1}/{2}.jsp" />
     </definition>
 
     <definition name="user/*/*" extends="tiles_template">

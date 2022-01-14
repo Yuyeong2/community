@@ -93,20 +93,19 @@ public class UserController {
     public void password() {}
 
     @PostMapping("/mypage/password")
-    public String passwordProc(UserDto dto,HttpSession hs, RedirectAttributes reAttr) {
+    public String passwordProc(UserDto dto, HttpSession hs, RedirectAttributes rAttr) {
         int result = service.changePassword(dto);
         if(result != 1) {
-            switch (result) {
+            switch(result) {
                 case 0:
-                    reAttr.addFlashAttribute(Const.MSG, "비밀번호 변경에 실패하였습니다.");
+                    rAttr.addFlashAttribute(Const.MSG, "비밀번호 변경에 실패하였습니다.");
                     break;
                 case 2:
-                    reAttr.addFlashAttribute(Const.MSG, "현재 비밀번호를 확인해 주세요.");
+                    rAttr.addFlashAttribute(Const.MSG, "현재 비밀번호를 확인해 주세요.");
                     break;
             }
             return "redirect:/user/mypage/password";
         }
-        hs.invalidate();
         return "redirect:/user/logout";
     }
 }

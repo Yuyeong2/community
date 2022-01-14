@@ -5,5 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BoardDto extends BoardEntity {
+public class BoardPrevNextVo {
+    private int previboard;
+    private int nextiboard;
 }
