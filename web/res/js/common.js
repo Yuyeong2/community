@@ -33,8 +33,8 @@ const myFetch = {
     },
     get: function(url, cb, param) {
         if(param) {
-            const queryString = Object.keys(param).map(key => `${key}=${param[key]}`).join('&');
-            url = `${url}?${queryString}`;
+            const queryString = '?' + Object.keys(param).map(key => `${key}=${param[key]}`).join('&');
+            url += queryString;
         }
         return this.send(fetch(url), cb);
     },
@@ -43,6 +43,12 @@ const myFetch = {
             'method': 'post',
             'headers': { 'Content-Type': 'application/json' },
             'body': JSON.stringify(param)
+        }), cb);
+    },
+    delete: function(url, cb) {
+        return this.send(fetch(url, {
+            'method': 'delete',
+            'headers': { 'Content-Type': 'application/json' },
         }), cb);
     }
 }
