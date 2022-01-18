@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.community.board.cmt.BoardCmtMapper">
-    <insert id="insBoardCmt">
+    <insert id="insBoardCmt" useGeneratedKeys="true" keyProperty="icmt">
         INSERT INTO t_board_cmt (iboard, iuser, ctnt)
         VALUES (${iboard}, ${iuser}, #{ctnt})
     </insert>
 
     <select id="selBoardCmtList" resultType="BoardCmtVo">
-        SELECT A.icmt, A.ctnt, A.iuser, A.rdt, B.nm AS writernm, B.profileimg
+        SELECT A.*, B.nm AS writernm, B.profileimg
         FROM t_board_cmt A
-                 LEFT JOIN t_user B ON A.iuser = B.iuser
+                 LEFT JOIN t_user B
+                           ON A.iuser = B.iuser
         WHERE A.iboard = ${iboard}
-        ORDER BY A.icmt DESC
+        ORDER BY A.icmt
     </select>
+
+    <update id="updBoardCmt">
+        UPDATE t_board_cmt
+        SET ctnt = #{ctnt}
+        WHERE icmt = ${icmt} AND iuser = ${iuser}
+    </update>
 
     <delete id="delBoardCmt">
         DELETE FROM t_board_cmt

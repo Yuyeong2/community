@@ -17,7 +17,7 @@ public class BoardCmtController {
 
     @PostMapping
     public Map<String, Integer> insBoardCmt(@RequestBody BoardCmtEntity entity) {
-        System.out.println(entity);
+        System.out.println(entity); //iboard, ctnt
         Map<String, Integer> result = new HashMap<>();
         result.put("result", service.insBoardCmt(entity));
         return result;
@@ -25,7 +25,15 @@ public class BoardCmtController {
 
     @GetMapping("/{iboard}")
     public List<BoardCmtVo> selBoardCmtList(@PathVariable int iboard) {
+        System.out.println("iboard : " + iboard);
         return service.selBoardCmtList(iboard);
+    }
+
+    @PutMapping
+    public Map<String, Integer> updBoardCmt(@RequestBody BoardCmtEntity entity) {
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", service.updBoardCmt(entity));
+        return result;
     }
 
     @DeleteMapping("/{icmt}")
