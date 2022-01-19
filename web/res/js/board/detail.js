@@ -49,7 +49,7 @@
             };
             myFetch.post('/board/cmt', (data) => {
                 console.log('result : ' + data.result);
-                switch(data.result) {
+                switch(data.result) { //data.result에 icmt값이 넘어온다.
                     case 0:
                         alert('댓글 등록에 실패하였습니다.');
                         break;
@@ -73,6 +73,8 @@
                         table.appendChild(tr);
 
                         cmtFrmElem.ctnt.value = null;
+                        //document.body.scrollTop = document.body.scrollHeight; //작동 안 됨!
+                        window.scrollTo(0, document.body.scrollHeight);
                         break;
                 }
             }, param);
@@ -223,13 +225,49 @@
             }
         });
     }
+
+    const getTrLen = () => {
+        const cmtListElem = document.querySelector('#cmt_list');
+        const trArr = cmtListElem.querySelectorAll('table tr');
+        return trArr.length;
+    }
     getCmtList();
+
+    //좋아요 ------------------------------------------------------------ [start] --
+    const favIconElem = document.querySelector('#fav_icon');
+    const isFav = () => {
+        const iboard = dataElem.dataset.iboard;
+        myFetch.get(`/board/fav/${iboard}`, (data) => {
+            switch (data.result) {
+                case 0:
+                    disableFav();
+                    break;
+                case 1:
+                    enableFav();
+                    break;
+            }
+        });
+    }
+
+    const disableFav = () => {
+        if(favIconElem) {
+            favIconElem.classList.remove('fas');
+            favIconElem.classList.add('far');
+        }
+    }
+    const enableFav = () => {
+        if(favIconElem) {
+            favIconElem.classList.remove('fas');
+            favIconElem.classList.add('far');
+        }
+    }
+
+    if(dataElem.dataset.iuser) {
+        isFav();
+    }
+    //좋아요 ------------------------------------------------------------ [end] --
 }
 
-const getTrLen = () => {
-    const cmtListElem = document.querySelector('#cmt_list');
-    const trArr = cmtListElem.querySelectorAll('table tr');
-    return trArr.length;
-}
+
 
 // Restful API > POST, GET, PUT, DELETE

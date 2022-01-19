@@ -33,22 +33,22 @@
     </select>
     <select id="selPrevNext" resultType="BoardPrevNextVo">
         <![CDATA[
-        SELECT (
+        SELECT IFNULL((
                    SELECT iboard FROM t_board
                    WHERE isdel = 0
                      AND icategory = ${icategory}
                      AND iboard > ${iboard}
                    ORDER BY iboard
                    LIMIT 1
-            ) AS previboard,
-            (
+            ), 0) AS previboard,
+            IFNULL((
                 SELECT iboard FROM t_board
                 WHERE isdel = 0
                 AND icategory = ${icategory}
                 AND iboard < ${iboard}
                 ORDER BY iboard DESC
                 LIMIT 1
-                ) AS nextiboard
+                ), 0) AS nextiboard
         ]]>
     </select>
     <update id="addHits">

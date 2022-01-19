@@ -17,6 +17,12 @@
         <a href="/board/detail?iboard=${requestScope.prevNext.previboard}" class="${requestScope.prevNext.previboard == 0 ? 'invisibility' : ''}"><button>이전글</button></a>
         <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}" class="${requestScope.prevNext.nextiboard == 0 ? 'invisibility' : ''}"><button>다음글</button></a>
     </div>
+
+    <c:if test="${sessionScope.loginUser != null}">
+        <!-- 좋아요 -->
+        <i id="fav_icon" class="fs-30 pointer far fa-thumbs-up"></i>
+    </c:if>
+
     <div>
         <div>카테고리: ${data.categorynm}</div>
         <div>조회수: ${data.hits} | 등록일시: ${data.rdt}</div>

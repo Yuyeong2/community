@@ -12,6 +12,7 @@ public class Const {
     public static final String I_CATEGORY = "icategory";
     public static final String DATA = "data";
     public static final String PREV_NEXT = "prevNext";
+    public static final String RESULT = "result";
 
     public static final String ERR_1 = "알 수 없는 에러가 발생하였습니다.";
     public static final String ERR_2 = "아이디를 확인해 주세요.";
