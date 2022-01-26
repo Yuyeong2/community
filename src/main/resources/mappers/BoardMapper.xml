@@ -24,12 +24,9 @@
              , B.nm as writernm, B.profileimg
              , C.nm as categorynm
         FROM t_board A
-                 LEFT JOIN t_user B
-                           ON A.iuser = B.iuser
-                 LEFT JOIN t_board_category C
-                           ON A.icategory = C.icategory
-        WHERE A.isdel = 0
-          AND A.iboard = ${iboard}
+        LEFT JOIN t_user B ON A.iuser = B.iuser
+        LEFT JOIN t_board_category C ON A.icategory = C.icategory
+        WHERE A.isdel = 0 AND A.iboard = ${iboard}
     </select>
     <select id="selPrevNext" resultType="BoardPrevNextVo">
         <![CDATA[

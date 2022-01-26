@@ -235,10 +235,11 @@
 
     //좋아요 ------------------------------------------------------------ [start] --
     const favIconElem = document.querySelector('#fav_icon');
+
     const isFav = () => {
         const iboard = dataElem.dataset.iboard;
         myFetch.get(`/board/fav/${iboard}`, (data) => {
-            switch (data.result) {
+            switch(data.result) {
                 case 0:
                     disableFav();
                     break;
@@ -255,15 +256,43 @@
             favIconElem.classList.add('far');
         }
     }
+
     const enableFav = () => {
         if(favIconElem) {
-            favIconElem.classList.remove('fas');
-            favIconElem.classList.add('far');
+            favIconElem.classList.remove('far');
+            favIconElem.classList.add('fas');
         }
     }
 
     if(dataElem.dataset.iuser) {
         isFav();
+        favIconElem.addEventListener('click', () => {
+            const iboard = dataElem.dataset.iboard;
+            if(favIconElem.classList.contains('far')) { //no 좋아요
+                const param = { iboard };
+                myFetch.post(`/board/fav`, data => {
+                    switch (data.result) {
+                        case 0:
+                            alert('좋아요 처리에 실패하였습니다.');
+                            break;
+                        case 1:
+                            enableFav();
+                            break;
+                    }
+                }, param);
+            } else { //yes 좋아요
+                myFetch.delete(`/board/fav/${iboard}`, data => {
+                    switch (data.result) {
+                        case 0:
+                            alert('좋아요 처리에 실패하였습니다.');
+                            break;
+                        case 1:
+                            disableFav();
+                            break;
+                    }
+                });
+            }
+        });
     }
     //좋아요 ------------------------------------------------------------ [end] --
 }

@@ -28,6 +28,7 @@ public class BoardService {
     public List<BoardVo> selBoardList(BoardDto dto) {
         return mapper.selBoardList(dto);
     }
+
     public BoardVo selBoard(BoardDto dto) { //iboard, lastip
         BoardVo detail = mapper.selBoard(dto);
         if(dto.getLastip() != null && !Objects.equals(dto.getLastip(), detail.getLastip())) {
